@@ -2,7 +2,10 @@ name: Release Plugin
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
+
+permissions:
+  contents: write
 
 jobs:
   release:
@@ -11,6 +14,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Read version
         id: version
@@ -18,10 +24,14 @@ jobs:
           VERSION=$(jq -r .version plugin.json)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Create tag
+      - name: Create tag (if not exists)
         run: |
-          git tag v${{ steps.version.outputs.version }}
-          git push origin v${{ steps.version.outputs.version }}
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "Tag already exists"
+          else
+            git tag v${{ steps.version.outputs.version }}
+            git push origin v${{ steps.version.outputs.version }}
+          fi
 
       - name: Build ZIP
         run: |
@@ -38,7 +48,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add update.json
-          git commit -m "chore: update update.json"
+          git commit -m "chore: update update.json" || echo "No changes"
           git push
 
       - name: Create Release
