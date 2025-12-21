@@ -13,7 +13,7 @@ class GoodGamingCommunityThemePlugin implements Plugin
         return 'goodgaming-theme';
     }
 
-    public const GGC = [
+    public const ggc = [
         50 => 'oklch(0.975 0.0046 258.32)',
         100 => 'oklch(0.9286 0.00618 254.9897)',
         200 => 'oklch(0.8575 0.013 247.98)',
@@ -34,7 +34,7 @@ class GoodGamingCommunityThemePlugin implements Plugin
             ->monoFont('system-ui')
             ->serifFont('sans-serif')
             ->colors([
-                'gray' => self::GGC,
+                'gray' => self::ggc,
                 'primary' => Color::Blue,
             ]);
     }
