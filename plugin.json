@@ -1,0 +1,15 @@
+{
+    "id": "goodgaming-theme",
+    "name": "Good Gaming Community Theme",
+    "author": "Zaros",
+    "version": "1.0.0",
+    "description": "A theme for the Good Gaming Community for the Pelican Panel",
+    "category": "theme",
+    "url": "https://github.com/pelican-dev/plugins/tree/main/goodgaming-theme",
+    "update_url": null,
+    "namespace": "Zaros\\GoodGamingCommunityTheme",
+    "class": "GoodGamingCommunityThemePlugin",
+    "panels": null,
+    "panel_version": null,
+    "composer_packages": null
+}
